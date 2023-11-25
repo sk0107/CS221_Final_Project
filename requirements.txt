@@ -18,6 +18,8 @@ typing_extensions
 zipp
 keyboard
 cmake
+tensorflow
 gym[atari]
+random
 ale-py
 gym[accept-rom-license]
