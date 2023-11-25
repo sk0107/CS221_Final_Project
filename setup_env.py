@@ -12,6 +12,9 @@ def main():
     terminated = False
 
     while not terminated:  # You can adjust the number of steps here
+        print(env.action_space)
+        print(env.observation_space)
+        print()
         env.render()
         action = env.action_space.sample()  # Replace with your agent's action selection
         observation, reward, terminated, truncated, info = env.step(action)
