@@ -12,13 +12,16 @@ def main():
     observation = env.reset()
     terminated = False
     
-    action_numb = random.randint(0, 5)
-    print("POLICY IS NUMBER: ", action_numb)
-
+    last_policy = -1
     while not terminated:  # You can adjust the number of steps here
         env.render()
         # print(env.action_space.sample())
+
+        action_numb = random.randint(0, 5)
+        while action_numb == last_policy:
+            action_numb = random.randint(0, 5)
         action = action_numb # Replace with your agent's action selection
+        last_policy = action_numb
         observation, reward, terminated, truncated, info = env.step(action)
 
         if terminated:
