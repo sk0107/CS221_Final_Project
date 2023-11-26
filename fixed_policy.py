@@ -13,6 +13,7 @@ def main():
     terminated = False
     
     action_numb = random.randint(0, 5)
+    total_reward = 0  # Initialize total reward for the episode
 
     while not terminated:  # You can adjust the number of steps here
         env.render()
@@ -22,6 +23,7 @@ def main():
 
         if terminated:
             observation = env.reset()
+    print(f"Episode {episode + 1}: Total Reward = {total_reward}")  # Print the total reward for the episode
 
     env.close()
 
