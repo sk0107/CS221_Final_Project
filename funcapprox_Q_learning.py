@@ -73,7 +73,7 @@ def main():
     discount = 0.99
     q_learning = FunctionApproxQLearning(feature_dim, feature_extractor, actions, discount)
 
-    episodes = 100
+    episodes = 300
 
     for episode in range(episodes):
         state = env.reset()

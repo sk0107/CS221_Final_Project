@@ -57,7 +57,7 @@ def preprocess_state(state):
     return state
 
 def main():
-    env = gym.make('SpaceInvaders-v4', render_mode="human")
+    env = gym.make('SpaceInvaders-v4')
     state_size = (210, 160, 3)  # Update with correct dimensions if different
     action_size = env.action_space.n
     agent = DQNAgent(state_size, action_size)
@@ -96,7 +96,7 @@ def main():
             
             total_reward += reward
         
-        print(f"Episode {e + 1}: Total Reward = {total_reward}")  # Print the total reward for the episode
+        print(f"Episode {e + 1}: Total Reward = {total_reward}", file=sys.stdout)  # Print the total reward for the episode
 
 
     env.close()
