@@ -42,11 +42,23 @@ class DQNAgent:
         if len(self.memory) < 100:
             return
         minibatch = random.sample(self.memory, batch_size)
+        states = []
+        target_fs = []
         for state, action, reward, next_state, done in minibatch:
             target = reward if done else reward + self.gamma * np.amax(self.model.predict(next_state)[0])
             target_f = self.model.predict(state)
             target_f[0][action] = target
-            self.model.fit(state, target_f, epochs=1, verbose=0)
+
+            states.append(state[0])  # Assuming state is encapsulated in an extra dimension
+            target_fs.append(target_f[0])
+
+        # Convert lists to numpy arrays for training
+        states = np.array(states)
+        target_fs = np.array(target_fs)
+
+        # Fit the model with all the accumulated data
+        self.model.fit(states, target_fs, epochs=1, verbose=0, batch_size=batch_size)
+
 
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay

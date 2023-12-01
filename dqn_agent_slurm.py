@@ -62,17 +62,18 @@ def main():
     state_size = (210, 160, 3)  # Update with correct dimensions if different
     action_size = env.action_space.n
     agent = DQNAgent(state_size, action_size)
-    batch_size = 16
+    batch_size = 32
     total_reward = 0 
 
-    episodes = 300  # Set total number of episodes
+    episodes = 10000  # Set total number of episodes
     for e in range(episodes):
         state = preprocess_state(env.reset())
         state = state[0] 
         state = np.reshape(state, [1, state_size[0], state_size[1], state_size[2]])
         terminated = False
-        train_interval = 10  # Train after every 10 steps
+        train_interval = 20  # Train after every 10 steps
         step_count = 0
+        total_reward = 0 
 
         while not terminated:
             action = agent.act(state)
