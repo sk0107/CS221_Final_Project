@@ -97,8 +97,7 @@ def main():
             
             total_reward += reward
         
-        print(f"Episode {e + 1}: Total Reward = {total_reward}", file=sys.stdout)  # Print the total reward for the episode
-
+        print("Episode {}: Total Reward = {}".format(e + 1, total_reward), file=sys.stdout)
 
     env.close()
 
