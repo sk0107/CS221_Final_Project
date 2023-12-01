@@ -2,9 +2,10 @@
 #SBATCH --job-name=dqn_agent_run
 #SBATCH --output=dqn_output_%j.txt
 #SBATCH --nodes=1
-#SBATCH --time=01:00:00
-#SBATCH --mem=4G
+#SBATCH --time=10:00:00
+#SBATCH --mem=16G
 #SBATCH --partition=gpu
+#SBATCH --qos=gpu
 
 # Load Python 3.11.5 environment
 module load python/3.11.5  # Adjust this line as per your system's module configuration
