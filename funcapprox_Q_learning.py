@@ -49,26 +49,20 @@ class FunctionApproxQLearning:
         features = self.feature_extractor(state)
         self.W[:, action] += step_size * (new_value - old_value) * features
 
-# Example feature extractor (you need to define a suitable one)
 def feature_extractor(state):
-    # Resize the image to a smaller size (10x10) and flatten
     if isinstance(state, tuple):
-        image_data = state[0]  # Assuming the image data is the first element of the tuple
+        image_data = state[0]
     else:
         image_data = state
-
-    # Resize the image to a smaller size (10x10) and flatten
     resized_image = resize(image_data, output_shape=(10, 10), anti_aliasing=True, mode='constant')
-    # Convert to grayscale if it's a color image
     if len(resized_image.shape) > 2 and resized_image.shape[2] == 3:
         resized_image = np.dot(resized_image[..., :3], [0.2989, 0.5870, 0.1140])
-
     return resized_image.flatten()
 
 
 def main():
     env = gym.make('SpaceInvaders-v4', render_mode="human")
-    feature_dim = 100  # This should match the output size of the feature extractor
+    feature_dim = 100  
     actions = list(range(env.action_space.n))
     discount = 0.99
     q_learning = FunctionApproxQLearning(feature_dim, feature_extractor, actions, discount)
@@ -78,7 +72,7 @@ def main():
     for episode in range(episodes):
         state = env.reset()
         terminated = False
-        total_reward = 0  # Initialize total reward for the episode
+        total_reward = 0  
 
         while not terminated:
             env.render()
