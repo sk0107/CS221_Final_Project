@@ -49,14 +49,11 @@ class DQNAgent:
             target_f = self.model.predict(state)
             target_f[0][action] = target
 
-            states.append(state[0])  # Assuming state is encapsulated in an extra dimension
+            states.append(state[0])  
             target_fs.append(target_f[0])
 
-        # Convert lists to numpy arrays for training
         states = np.array(states)
         target_fs = np.array(target_fs)
-
-        # Fit the model with all the accumulated data
         self.model.fit(states, target_fs, epochs=1, verbose=0, batch_size=batch_size)
 
 
@@ -64,13 +61,12 @@ class DQNAgent:
             self.epsilon *= self.epsilon_decay
 
 def preprocess_state(state):
-    # Implement any preprocessing here
-    # For simplicity, this example does not include preprocessing
+    # For simplicity, this doesn't include preprocessing
     return state
 
 def main():
     env = gym.make('SpaceInvaders-v4', render_mode="human")
-    state_size = (210, 160, 3)  # Update with correct dimensions if different
+    state_size = (210, 160, 3)  
     action_size = env.action_space.n
     agent = DQNAgent(state_size, action_size)
     batch_size = 16
